@@ -1,14 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useStore from '../store/Store'; // Import the store
 
 function AppointmentTime({ time }) {
-  const isAvailable = time.available !== false; 
+  const reserveTime = useStore((state) => state.reserveTime);
+
+  const handleReserve = () => {
+    reserveTime(time); // Mark this time as reserved
+  };
 
   return (
     <div>
-      {isAvailable ? (
+      {time.available ? (
         <Link to="/reserve">
           <button
+            onClick={handleReserve}
             className='w-36 h-11 bg-[#FBB034] text-black font-bold hover:bg-[#ff8818]'
           >
             {time.first} to {time.second}
@@ -23,7 +29,7 @@ function AppointmentTime({ time }) {
         </button>
       )}
     </div>
-  )
+  );
 }
 
-export default AppointmentTime
+export default AppointmentTime;
