@@ -6,13 +6,13 @@ function AppointmentTime({ time }) {
   const reserveTime = useStore((state) => state.reserveTime);
 
   const handleReserve = () => {
-    reserveTime(time); // Mark this time as reserved
+    reserveTime(time); // Reserve this specific time
   };
 
   return (
     <div>
       {time.available ? (
-        <Link to="/reserve">
+        <Link to={`/reserve?time=${time.first}-${time.second}`}>
           <button
             onClick={handleReserve}
             className='w-36 h-11 bg-[#FBB034] text-black font-bold hover:bg-[#ff8818]'

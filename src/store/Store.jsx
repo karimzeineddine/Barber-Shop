@@ -1,26 +1,7 @@
 import { create } from 'zustand';
 
 const useStore = create((set) => ({
-    clients:[
-        {
-            name:"karim",
-            phone:"876543234",
-            service:"vsdvsvsr",
-            time:"12"
-        },
-        {
-            name:"karim",
-            phone:"876543234",
-            service:"vsdvsvsr",
-            time:"12"
-        },
-        {
-            name:"karim",
-            phone:"876543234",
-            service:"vsdvsvsr",
-            time:"12"
-        },
-    ],
+    clients:[],
   times: [
     {
         first: "10:00",
@@ -78,6 +59,10 @@ const useStore = create((set) => ({
           : time
       ),
     })),
+    addClient: (newClient) => set((state) => ({
+        clients: [...state.clients, newClient]
+      })),
+    
 }));
 
 export default useStore;
