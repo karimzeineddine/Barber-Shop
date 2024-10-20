@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom'; // Import useLocation for query params
+import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import useStore from '../store/Store';
 import { Link } from 'react-router-dom';
 
 function Reserve() {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [service, setService] = useState('');
+  // Use Zustand to manage state
+  const name = useStore((state) => state.name);
+  const phone = useStore((state) => state.phone);
+  const service = useStore((state) => state.service);
+  const setName = useStore((state) => state.setName);
+  const setPhone = useStore((state) => state.setPhone);
+  const setService = useStore((state) => state.setService);
   const addClient = useStore((state) => state.addClient);
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,10 +21,7 @@ function Reserve() {
 
   const handleReserve = () => {
     if (name && phone && service && reservedTime) {
-      // Add the client with the reserved time
       addClient({ name, phone, service, time: reservedTime });
-
-      // Navigate back to the appointment page
       navigate('/');
     }
   };
